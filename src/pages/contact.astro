@@ -5,18 +5,22 @@ import Layout from '../layouts/Layout.astro';
   <h2>Let’s get you rolling.</h2>
   <p>Tell me a little about your trip and I’ll get back with availability & pricing.</p>
 
-  <form method="POST" action="https://formspree.io/f/your-id-here">
-    <label>Name</label>
-    <input name="name" required />
+ <form method="POST" action="https://formspree.io/f/your-id-here">
+  <input type="hidden" name="_next" value="/thanks" />
+  
+  <label>Name</label>
+  <input name="name" required />
+  
+  <label>Email</label>
+  <input type="email" name="email" required />
+  
+  <label>Dates / Event / Rig (optional)</label>
+  <textarea name="message" rows="6" placeholder="Dates, event, headcount, any notes."></textarea>
+  
+  <button class="button" type="submit">Send request</button>
+  <p><small class="muted">By submitting, you agree to be contacted about this inquiry.</small></p>
+</form>
 
-    <label>Email</label>
-    <input type="email" name="email" required />
 
-    <label>Dates / Event / Rig (optional)</label>
-    <textarea name="message" rows="6" placeholder="Dates, event, headcount, any notes."></textarea>
-
-    <button class="button" type="submit">Send request</button>
-    <p><small class="muted">By submitting, you agree to be contacted about this inquiry.</small></p>
-  </form>
 </Layout>
 
