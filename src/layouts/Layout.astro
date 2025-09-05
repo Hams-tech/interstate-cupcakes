@@ -1,0 +1,40 @@
+---
+const { title = 'Interstate Cupcakes', description = 'RV freedom, festival comfort, tech-smart living.' } = Astro.props;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/brand.css">
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <span style="font-size:1.4rem">🧁🛣️</span>
+          <a href="/" style="font-weight:800">Interstate Cupcakes</a>
+          <span class="badge">KY • RV Rentals</span>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap">
+          <a href="/rentals">RV Rentals</a>
+          <a href="/sustainability">Sustainability</a>
+          <a href="/lab">Tech Lab</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </nav>
+      <slot />
+      <footer>
+        <hr style="border-color:#143127;opacity:.5"/>
+        <div class="section">
+          <small class="muted">© {new Date().getFullYear()} Interstate Cupcakes • Richmond, KY • Michael Hamilton • <a href="mailto:chiefmbh1@gmail.com">chiefmbh1@gmail.com</a> • (859) 314-1960</small>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

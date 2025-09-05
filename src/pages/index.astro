@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+const title = 'Interstate Cupcakes — RV freedom. Festival comfort. Tech-smart living.';
+const description = 'Festival-ready RV rentals with sustainable power, smart gear, and private tech. Based in Kentucky; serving road-trippers and festival crews.';
+---
+<Layout {title} {description}>
+  <section class="hero">
+    <h1>RV freedom. Festival comfort. <span style="color:var(--accent)">Tech-smart</span> living.</h1>
+    <p>Rent a clean, reliable RV for your next festival or road trip—powered by real sustainability and a nerdy love of good systems (AI, crypto, solar, and self-hosted cloud). Zero fluff, all function.</p>
+    <div class="ctas">
+      <a class="button" href="/contact">Get a Quote</a>
+      <a class="button alt" href="/rentals">See the Rigs</a>
+    </div>
+    <img class="resp" src="/images/hero-rv.jpg" alt="Interstate Cupcakes RV hero image placeholder" />
+  </section>
+
+  <section class="grid">
+    <div class="card"><h3>Festival-Ready</h3><p>Shade, cooling, smart power, and storage dialed for long weekends.</p></div>
+    <div class="card"><h3>Sustainable by Default</h3><p>Solar assist, battery health, fewer generators, less waste.</p></div>
+    <div class="card"><h3>Tech-Forward</h3><p>From GPS and sensors to self-hosted cloud. If it saves time, we use it.</p></div>
+  </section>
+</Layout>

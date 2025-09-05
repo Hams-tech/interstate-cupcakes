@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Contact • Interstate Cupcakes">
+  <h2>Let’s get you rolling.</h2>
+  <p>Email: <a href="mailto:chiefmbh1@gmail.com">chiefmbh1@gmail.com</a> • Phone: <a href="tel:+18593141960">(859) 314-1960</a></p>
+  <form method="POST" action="https://formspree.io/f/your-id-here">
+    <label>Name</label>
+    <input name="name" required />
+    <label>Email</label>
+    <input type="email" name="email" required />
+    <label>Dates / Event / Rig (optional)</label>
+    <textarea name="message" rows="6" placeholder="Tell me your dates, event, and any notes."></textarea>
+    <button class="button" type="submit">Send request</button>
+    <p><small class="muted">No form service yet? Replace the action URL above with your Formspree ID or use mailto:chiefmbh1@gmail.com.</small></p>
+  </form>
+</Layout>

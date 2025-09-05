@@ -1,0 +1,35 @@
+:root{
+  --bg:#0E1B14;
+  --text:#F5F7FA;
+  --muted:#E8F5ED;
+  --accent:#00D1B2;
+  --accent2:#F9A826;
+  --ink:#222834;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, 'Helvetica Neue', Arial, 'Apple Color Emoji', 'Segoe UI Emoji';}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1100px;margin:0 auto;padding:2rem}
+nav{display:flex;gap:1rem;align-items:center;justify-content:space-between;padding:1rem 0}
+nav a{font-weight:600}
+.brand{display:flex;gap:.6rem;align-items:center}
+.badge{background:var(--muted);color:var(--ink);padding:.2rem .5rem;border-radius:999px;font-size:.8rem}
+.hero{display:grid;gap:1.2rem;padding:4rem 0}
+.hero h1{font-family:Poppins, Inter, system-ui, sans-serif;font-weight:700;font-size:clamp(2rem,5vw,3rem);line-height:1.05;margin:0}
+.hero p{font-size:1.1rem;max-width:70ch}
+.ctas{display:flex;gap:.75rem;flex-wrap:wrap}
+.button{background:var(--accent);color:#07241e;padding:.8rem 1rem;border-radius:.8rem;font-weight:700;display:inline-block}
+.button.alt{background:var(--accent2);color:#3a2404}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:2rem 0}
+.card{background:#0f251d;border:1px solid #143127;border-radius:1rem;padding:1rem}
+footer{opacity:.8;padding:3rem 0}
+h2{font-family:Poppins, Inter, system-ui, sans-serif;font-size:1.6rem;margin-top:2rem}
+ul.check{list-style:none;padding:0;margin:0}
+ul.check li{padding:.35rem 0}
+.section{padding:2rem 0}
+img.resp{max-width:100%;height:auto;border-radius:.8rem;border:1px solid #143127}
+form label{display:block;margin:.6rem 0 .2rem}
+input, textarea{width:100%;padding:.8rem;border-radius:.6rem;border:1px solid #143127;background:#0f251d;color:var(--text)}
+form button{margin-top:1rem}
+small.muted{color:#cfe6d7}
