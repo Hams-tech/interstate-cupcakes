@@ -5,4 +5,47 @@ import Layout from '../layouts/Layout.astro';
   <h2>🎉 Thanks for reaching out!</h2>
   <p>Your message is on its way. We’ll get back to you soon.</p>
   <p><a class="button" href="/">← Back to Home</a></p>
+
+  <script>
+    // Mini confetti when the page loads
+    const EMOJIS = ["🧁","🚐","✨","🎶"];
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    function spawnEmoji({x, y, size=1.5, rotate=720, dur=1200, vx=0, vy=-600}) {
+      const span = document.createElement("span");
+      span.textContent = EMOJIS[(Math.random()*EMOJIS.length)|0];
+      Object.assign(span.style, {
+        position: "fixed", left: x+"px", top: y+"px",
+        fontSize: size+"rem", pointerEvents: "none",
+        willChange: "transform, opacity",
+        transition: `transform ${dur}ms cubic-bezier(.15,.6,.2,1), opacity ${dur}ms linear`,
+        opacity: "1"
+      });
+      document.body.appendChild(span);
+      requestAnimationFrame(()=>{
+        const dx = vx * (dur/1000);
+        const dy = vy * (dur/1000) + 0.5 * 900 * Math.pow(dur/1000, 2);
+        span.style.transform = `translate(${dx}px, ${dy}px) rotate(${rotate}deg)`;
+        span.style.opacity = "0";
+      });
+      setTimeout(()=>span.remove(), dur+120);
+    }
+    function burst(centerX, centerY, count=48) {
+      for (let i=0;i<count;i++){
+        spawnEmoji({
+          x: centerX + rand(-20,20),
+          y: centerY + rand(-10,10),
+          size: rand(1.2,2.2),
+          rotate: rand(360,1080),
+          dur: rand(900,1500),
+          vx: rand(-320,320),
+          vy: rand(-900,-500)
+        });
+      }
+    }
+    window.addEventListener("load", ()=>{
+      const cx = window.innerWidth/2, cy = window.innerHeight/2;
+      burst(cx, cy, 56);
+    });
+  </script>
 </Layout>
+

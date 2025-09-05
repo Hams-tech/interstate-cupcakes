@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const title = 'Interstate Cupcakes — RV freedom. Festival comfort. Tech-smart living.';
-const description = 'Festival-ready RV rentals with sustainable power, smart gear, and private tech. Based in Kentucky; serving road-trippers and festival crews.';
+const description = 'Festival-ready RV rentals with sustainable power, smart gear, and private tech.';
 ---
 <Layout {title} {description}>
   <section class="hero">
@@ -13,7 +13,7 @@ const description = 'Festival-ready RV rentals with sustainable power, smart gea
       <a class="button" href="/contact">Get a Quote</a>
       <a class="button alt" href="/rentals">See the Rigs</a>
     </div>
-    <img class="resp" src="/images/hero-rv.jpg" alt="Interstate Cupcakes RV hero image placeholder" />
+    <img class="resp" src="/images/hero-rv.jpg" alt="Interstate Cupcakes RV hero image" />
   </section>
 
   <section class="grid">
@@ -22,35 +22,110 @@ const description = 'Festival-ready RV rentals with sustainable power, smart gea
     <div class="card"><h3>Tech-Forward</h3><p>From GPS and sensors to self-hosted cloud. If it saves time, we use it.</p></div>
   </section>
 
-  <!-- Confetti effect -->
+  <!-- Party Mode button -->
+  <button id="partyBtn" aria-label="Party Mode">🎉 Party Mode</button>
+
+  <!-- Confetti engine -->
   <script>
-    function releaseConfetti() {
-      const emojis = ["🧁", "🚐"];
-      for (let i = 0; i < 12; i++) {
-        const span = document.createElement("span");
-        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-        span.style.position = "fixed";
-        span.style.left = Math.random() * 100 + "vw";
-        span.style.top = "100vh";
-        span.style.fontSize = Math.random() * 2 + 1 + "rem";
-        span.style.animation = "floatUp 4s ease-out forwards";
-        span.style.pointerEvents = "none";
-        document.body.appendChild(span);
-        setTimeout(() => span.remove(), 4000);
+    const EMOJIS = ["🧁","🚐","✨","🎶"];
+    const rand = (min, max) => Math.random() * (max - min) + min;
+
+    function spawnEmoji({x, y, size=1.5, rotate=720, dur=1200, vx=0, vy=-600}) {
+      const span = document.createElement("span");
+      span.textContent = EMOJIS[(Math.random()*EMOJIS.length)|0];
+      span.style.position = "fixed";
+      span.style.left = x + "px";
+      span.style.top = y + "px";
+      span.style.fontSize = size + "rem";
+      span.style.pointerEvents = "none";
+      span.style.willChange = "transform, opacity";
+      span.style.transition = `transform ${dur}ms cubic-bezier(.15,.6,.2,1), opacity ${dur}ms linear`;
+      document.body.appendChild(span);
+
+      // start slightly scaled
+      span.style.transform = `translate(0px, 0px) rotate(0deg) scale(0.8)`;
+      span.style.opacity = "1";
+
+      requestAnimationFrame(() => {
+        const dx = vx * (dur/1000);
+        const dy = vy * (dur/1000) + 0.5 * 900 * Math.pow(dur/1000, 2); // gravity ~900px/s^2
+        span.style.transform = `translate(${dx}px, ${dy}px) rotate(${rotate}deg) scale(1)`;
+        span.style.opacity = "0";
+      });
+
+      setTimeout(() => span.remove(), dur + 100);
+    }
+
+    function burst(centerX, centerY, count=42) {
+      for (let i=0;i<count;i++){
+        spawnEmoji({
+          x: centerX + rand(-20,20),
+          y: centerY + rand(-10,10),
+          size: rand(1.2,2.2),
+          rotate: rand(360,1080),
+          dur: rand(900,1600),
+          vx: rand(-300,300),
+          vy: rand(-900,-500)
+        });
       }
     }
 
-    setInterval(releaseConfetti, 6000); // every 6 seconds
-    window.addEventListener("load", releaseConfetti); // first burst on load
+    // Gentle ambient float every 6s
+    function ambient() {
+      const x = rand(50, window.innerWidth - 50);
+      const y = window.innerHeight + 20;
+      for (let i=0;i<12;i++){
+        spawnEmoji({
+          x: rand(0, window.innerWidth),
+          y,
+          size: rand(1,2.5),
+          rotate: rand(180,720),
+          dur: rand(2000,3200),
+          vx: rand(-60,60),
+          vy: rand(-650,-450)
+        });
+      }
+    }
+    const ambientTimer = setInterval(ambient, 6000);
+    window.addEventListener("load", ambient);
+
+    // Party button logic
+    const btn = document.getElementById("partyBtn");
+    function partyBurst(e){
+      const rect = btn.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      burst(cx, cy, 64);
+      btn.classList.add("pulse");
+      setTimeout(()=>btn.classList.remove("pulse"), 800);
+    }
+    btn.addEventListener("click", partyBurst);
+    btn.addEventListener("keydown", (ev)=> (ev.key === "Enter"||ev.key===" ") && partyBurst(ev));
   </script>
 
   <style>
-    @keyframes floatUp {
-      to {
-        transform: translateY(-120vh) rotate(720deg);
-        opacity: 0;
-      }
+    /* Party button styling */
+    #partyBtn{
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      padding: .8rem 1rem;
+      border: none;
+      border-radius: .9rem;
+      font-weight: 800;
+      background: var(--accent2);
+      color: #3a2404;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25), 0 0 0 0 rgba(249,168,38,.6);
+      cursor: pointer;
+      z-index: 50;
+    }
+    #partyBtn:hover{ transform: translateY(-1px); }
+    #partyBtn.pulse{ animation: glow .8s ease-out; }
+    @keyframes glow {
+      0% { box-shadow: 0 0 0 0 rgba(249,168,38,.7); }
+      100% { box-shadow: 0 0 0 24px rgba(249,168,38,0); }
     }
   </style>
 </Layout>
+
 
